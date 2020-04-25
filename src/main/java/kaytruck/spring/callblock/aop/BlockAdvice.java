@@ -18,12 +18,13 @@ public class BlockAdvice {
     @Autowired
     private BlockConfig blockConfig;
 
-    private Map<String, BlockStatusCode> map;
+    private Map<String, BlockStatusCode> statusMap;
 
     @PostConstruct
     public void postConstruct() {
-        map = blockConfig.getBlockStatus();
+        statusMap = blockConfig.getBlockStatus();
     }
+    
     public Object aroundInvoke(ProceedingJoinPoint jp) {
         // 実行しようとしているクラス名を取得する
         Signature signature = jp.getSignature();
@@ -34,7 +35,7 @@ public class BlockAdvice {
         }
 
         // 閉塞ステータスの確認
-        BlockStatusCode blockStatus = map.get(invoke);
+        BlockStatusCode blockStatus = statusMap.get(invoke);
         if (BlockStatusCode.CLOSE.equals(blockStatus)) {
             throw new BlockException("閉塞中");
         }

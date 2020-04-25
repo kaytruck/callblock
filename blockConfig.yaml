@@ -1,0 +1,5 @@
+includeMethod: true
+controlKeys:
+  - com.example.restdemo.service.CalcService.add#CLOSE
+  - com.example.restdemo.service.CalcService.sub#OPEN
+  - com.example.restdemo.service.CalcService.mul
