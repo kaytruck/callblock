@@ -15,8 +15,6 @@ import kaytruck.spring.callblock.exception.SystemException;
 
 public class BlockAdvice {
 
-    // private BlockConfiguration blockConfiguration;
-
     @Autowired
     private BlockConfig blockConfig;
 
