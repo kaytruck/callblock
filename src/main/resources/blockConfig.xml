@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+    <bean id="blockAdvice" class="kaytruck.spring.block.aop.BlockAdvice">
+        <!-- <property name="blockConfiguration" ref="blockConfiguration" /> -->
+    </bean>
+    
+    <!-- <bean id="blockConfiguration" class="kaytruck.spring.block.configuration.BlockConfiguration" >
+        <property name="targetNames">
+            <list>
+                <value>add</value>
+            </list>
+        </property>
+    </bean> -->
+
+    <aop:config>
+        <aop:aspect id="blockAspect" ref="blockAdvice">
+            <aop:pointcut id="blockTarget" expression="within(*..service..*)" />
+            <aop:around method="aroundInvoke" pointcut-ref="blockTarget" />
+        </aop:aspect>
+    </aop:config>
+
+</beans>
